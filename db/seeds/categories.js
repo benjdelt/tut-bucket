@@ -1,27 +1,27 @@
 exports.seed = function(knex, Promise) {
-  return knex('users').del()
+  return knex('categories').del()
     .then(function () {
       return Promise.all([
-        knex('users').insert({name: 'Cooking'}),
-        knex('users').insert({name: 'Math'}),
-        knex('users').insert({name: 'Science'}),
-        knex('users').insert({name: 'Programming'}),
-        knex('users').insert({name: 'Sports'}),
-        knex('users').insert({name: 'Tech'}),
-        knex('users').insert({name: 'Photography'}),
-        knex('users').insert({name: 'Drawing'}),
-        knex('users').insert({name: 'Music'}),
-        knex('users').insert({name: 'History'}),
-        knex('users').insert({name: 'Business'}),
-        knex('users').insert({name: 'Finance'}),
-        knex('users').insert({name: 'Gaming'}),
-        knex('users').insert({name: 'Makeup'}),
-        knex('users').insert({name: 'Fashion'}),
-        knex('users').insert({name: 'Health'}),
-        knex('users').insert({name: 'DIY'}),
-        knex('users').insert({name: 'Graphic Design'}),
-        knex('users').insert({name: 'Languages'}),
-        knex('users').insert({name: 'Psychology'})
+        knex('categories').insert({name: 'Cooking'}),
+        knex('categories').insert({name: 'Math'}),
+        knex('categories').insert({name: 'Science'}),
+        knex('categories').insert({name: 'Programming'}),
+        knex('categories').insert({name: 'Sports'}),
+        knex('categories').insert({name: 'Tech'}),
+        knex('categories').insert({name: 'Photography'}),
+        knex('categories').insert({name: 'Drawing'}),
+        knex('categories').insert({name: 'Music'}),
+        knex('categories').insert({name: 'History'}),
+        knex('categories').insert({name: 'Business'}),
+        knex('categories').insert({name: 'Finance'}),
+        knex('categories').insert({name: 'Gaming'}),
+        knex('categories').insert({name: 'Makeup'}),
+        knex('categories').insert({name: 'Fashion'}),
+        knex('categories').insert({name: 'Health'}),
+        knex('categories').insert({name: 'DIY'}),
+        knex('categories').insert({name: 'Graphic Design'}),
+        knex('categories').insert({name: 'Languages'}),
+        knex('categories').insert({name: 'Psychology'})
       ]);
     }
   )
