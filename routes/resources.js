@@ -3,14 +3,14 @@
 const express = require('express');
 const router  = express.Router();
 
-// const dataHelpers = require('../lib/users-data-helpers');
+const dataHelpers = require('../lib/resources-data-helpers');
 
 module.exports = (knex) => {
 
   router.get("/", (req, res) => {
     knex
       .select("*")
-      .from("users")
+      .from("resources")
       .then((results) => {
         res.json(results);
     });
