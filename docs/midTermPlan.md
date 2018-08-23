@@ -11,6 +11,28 @@
  - likes
  - ratings
  
+## TOPICS
+  - Cooking
+  - Math
+  - Science
+  - Programming
+  - Sports
+  - Tech
+  - Photography
+  - Drawing
+  - Music
+  - History
+  - Business
+  - Finance
+  - Gaming
+  - Makeup
+  - Fashion
+  - Health
+  - DIY
+  - Graphic Design
+  - Languages
+  - Psychology
+
 # UNIVERSAL VALUES
 - Feel Good: 
 	- people like your content and share it
