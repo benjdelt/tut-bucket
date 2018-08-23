@@ -10,15 +10,15 @@
  - comments
  - likes
  - ratings
- 
+
 # UNIVERSAL VALUES
-- Feel Good: 
-	- people like your content and share it
+- Feel Good:
+  - people like your content and share it
 - Look Good:
   - People can see your cool interests
 - Saves Time:
-	- you don't need to scour the web to find thing you like
-    
+  - you don't need to scour the web to find thing you like
+
 # USER STORIES
   - As a user, I should be able to save an external URL along with a title and description, because I want others to see how cool I am and I found it useful
   - As a user, I should be able to search for already-saved resources created by any user, because I'm looking for new resources for what I'm interested in
@@ -28,7 +28,7 @@
   - As a user, I should be able to like any resource, because I want to keep track of what I like or found interesting
   - As a user, I should be able to view all my own and all liked resources on one page ("My resources"), because it makes looking for resources easier A-HA
   - As a user, I should be able to register, log in, log out and update my profile, because it helps me track my resources, and I don't want other people to change my resources
-  
+
 # USER SCENARIOS
   - Given that I've found something interesting online, when I fill out a form and submit it, then it will save the resource on my account and on my page
   - Given that I'm curious about an interest, when I enter a search in the search bar, then results are displayed or categories are provided (optional data-list dropdown)
@@ -39,7 +39,7 @@
   - Given that I visit my own page, when my page is displayed, then both categories (my resources, and all liked resources) will be displayed
   - Given that I want to sign up for this app, when I click the register button, then I'm taken to a form to fill out and submit, then I will have an account
   - Given that I have an account and want to log in, when I click the login button and provide my credentials, then I am redirected to my page
-  
+
 # ROUTES
   ## USERS
     - GET
@@ -49,17 +49,17 @@
 
  ## RESOURCES
     RESOURCES
-      - GET 
+      - GET
           - View the single resource: /resources/:id
-          -	Search for already-saved resources: /resources
+          - Search for already-saved resources: /resources
         - POST
           - Save external URL: /resources
         - PUT
           - Update the single resource: /resources/:id
         - DELETE
           - Delete resource: resources/:id
-    	- COMMENTS
-    		- GET 
+      - COMMENTS
+        - GET
           - Get a comment to edit: /resources/:id/comments/:id
         - POST
           - Comment on resource: /resources/:id/comments
@@ -67,17 +67,17 @@
           - Update/edit comments: resources/:id/comments/:id
         - DELETE
           - Delete comment: resources/:id/comment/:id
-    	- LIKES
+      - LIKES
         - POST
           - Like a resource: /resources/:id/likes
         - DELETE
           - Delete like: resources/:id/likes/:id
-    	- RATINGS
+      - RATINGS
         - POST
           - Rate a resource: /resources/:id/rating
         - PUT
           - Update/edit rating: resources/:id/rating/:id
-        
+
 
 # TECH
   - Express
@@ -87,8 +87,18 @@
   - Knex
   - postgres
   - git
-  
 
-  
-  
-  
+#GIT procedure
+  - create branch
+  - code on branch
+  - close the file
+  - add, commit, push the branch (keep track of branch) (git push origin <branch-name>)
+  - check out master
+  - pull origin master
+  - test, check conflict if one? SOS on slack
+  - if fixed, merge branch to master
+  - push
+
+
+
+
