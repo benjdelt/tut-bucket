@@ -14,4 +14,6 @@ exports.seed = function(knex, Promise) {
         knex('users').insert({name: 'Helen', email: 'Erna_Franecki40@hotmail.com'})
       ]);
 
-};
+    }
+  )
+}
