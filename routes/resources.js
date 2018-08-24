@@ -16,7 +16,6 @@ module.exports = (knex) => {
     });
   });
 
-
   router.get("/categories", (req, res) => {
     knex
     .select("name")
@@ -35,11 +34,10 @@ module.exports = (knex) => {
           if(!results.length) {
             res.status(404).json({error: "Not found"});
           } else {
-            let templateVars = results[0];
-            console.log(templateVars);
-            res.render("resources_id", templateVars);
+            res.json(results);
           }
        });
   });
+
   return router;
 }
