@@ -41,5 +41,14 @@ module.exports = (knex) => {
           }
        });
   });
+  router.get("/new", (req, res) => {
+  
+  });
+  router.post("/", (req, res) => {
+
+  });
+  router.post("/:id", (req, res) => {
+
+  });
   return router;
 }
