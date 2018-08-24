@@ -25,7 +25,9 @@ module.exports = (knex) => {
           if(!results.length) {
             res.status(404).json({error: "Not found"});
           } else {
-            res.json(results);
+            let templateVars = results[0];
+            console.log(templateVars);
+            res.render("resources_id", templateVars);
           }
        });
   });
