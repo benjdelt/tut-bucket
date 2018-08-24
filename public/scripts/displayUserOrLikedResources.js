@@ -41,3 +41,13 @@ function displayLikedResources() {
     }
   });
 }
+
+$("#myPosts").on("click", (event) => {
+  $("#collections").html('');
+  displayUserResources();
+});
+
+$("#myLikedPosts").on("click", (event) => {
+  $("#collections").html('');
+  displayLikedResources();
+});
