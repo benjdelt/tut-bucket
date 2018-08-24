@@ -32,6 +32,15 @@
   - Graphic Design
   - Languages
   - Psychology
+## Ratings
+A - 100
+B - 85
+C+ - 75
+C - 70
+C- - 60
+D - 45
+F - 0
+
 
 # UNIVERSAL VALUES
 - Feel Good:

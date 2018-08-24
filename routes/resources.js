@@ -16,6 +16,22 @@ module.exports = (knex) => {
     });
   });
 
+  router.get("/:id", (req, res) => {
+     knex
+       .select('*')
+       .from("resources")
+       .where({'id': req.params.id})
+       .then((results) => {
+          if(!results.length) {
+            res.status(404).json({error: "Not found"});
+          } else {
+            let templateVars = results[0];
+            console.log(templateVars);
+            res.render("resources_id", templateVars);
+          }
+       });
+  });
+
   router.get("/categories", (req, res) => {
     knex
       .select("name")
