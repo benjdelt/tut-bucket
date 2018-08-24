@@ -16,7 +16,7 @@ module.exports = (knex) => {
     });
   });
 
-  
+
   router.get("/categories", (req, res) => {
     knex
     .select("name")
@@ -25,7 +25,7 @@ module.exports = (knex) => {
       res.json(results);
     });
   });
-  
+
   router.get("/:id", (req, res) => {
      knex
        .select('*')
