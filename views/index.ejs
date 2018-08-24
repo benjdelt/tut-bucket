@@ -14,13 +14,34 @@
 
   <body>
   <div id="ben">
-
+    <nav class="navbar fixed-top navbar-light bg-light">
+      
+      <a href="#" ><img src="images/logo.png" class="navbar-brand" width="60" heigth="80" alt="logo"/></a>
+      
+      <form action="/resources" method="GET" class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      </form>  
+      <ul class="nav">
+        <li class="nav-item">      
+          <a class="nav-link" href="/users/<%= userId %>">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/resources">Browse</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/resources/new">+</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Logout</a>
+        </li>
+      </ul>
+    </nav>
   </div>  
   <div id="jotham">
     <div id="categories-buttons" class="d-flex p-2" style="overflow:auto;"></div>
   </div>
   <div id="nick">
-    
+
   </div>
 
     <script src="scripts/getCategoryButtons.js"></script>
