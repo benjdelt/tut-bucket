@@ -49,7 +49,7 @@ module.exports = (knex) => {
     .where({'user_id': req.params.id})
     .then((resources) => {
       if(!resources.length) {
-        res.status(404).json({error: "Not found"});
+        res.json({error: "Not found"});
       } else {
         res.json(resources);
       }
@@ -65,7 +65,7 @@ module.exports = (knex) => {
     .where({"users.id": req.params.id})
     .then((resources) => {
       if(!resources.length) {
-        res.status(404).json({error: "Not found"});
+        res.json({error: "Not found"});
       } else {
         res.json(resources);
       }
