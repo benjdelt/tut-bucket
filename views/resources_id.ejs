@@ -19,42 +19,72 @@
     <div class="row">
       <div class="col-lg-2"></div>
       <div class="col-lg-8">
+        <!-- Header -->
         <h2 class="mt-4"><%= title %></h2>
         <div class="d-flex justify-content-between">
           <h4> username </h4>
           <a href="<%= url %>"><%= url %></a>
         </div>  
+        <!-- Main content -->
         <img class="img-fluid rounded mx-auto d-block" src="<%= image_url %>"/>
         <p>Posted on <%= timestamp %></p>
         <div class="d-flex justify-content-between">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-success">
-              <input type="radio" name="ratings" id="A" > A
-            </label>
-            <label class="btn btn-success">
-              <input type="radio" name="ratings" id="B" > B
-            </label>
-            <label class="btn btn-warning">
-              <input type="radio" name="ratings" id="C+" > C+
-            </label>
-            <label class="btn btn-warning">
-                <input type="radio" name="ratings" id="C" > C
-            </label>
-            <label class="btn btn-warning">
-                <input type="radio" name="ratings" id="C-" > C-
+          <!-- Rating and Like buttons -->
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-success">
+                <input type="radio" name="ratings" id="A" > A
               </label>
-            <label class="btn btn-danger">
-              <input type="radio" name="ratings" id="D" > D
-            </label>
-            <label class="btn btn-danger">
-                <input type="radio" name="ratings" id="F" > F
-            </label>
+              <label class="btn btn-success">
+                <input type="radio" name="ratings" id="B" > B
+              </label>
+              <label class="btn btn-warning">
+                <input type="radio" name="ratings" id="C+" > C+
+              </label>
+              <label class="btn btn-warning">
+                  <input type="radio" name="ratings" id="C" > C
+              </label>
+              <label class="btn btn-warning">
+                  <input type="radio" name="ratings" id="C-" > C-
+                </label>
+              <label class="btn btn-danger">
+                <input type="radio" name="ratings" id="D" > D
+              </label>
+              <label class="btn btn-danger">
+                  <input type="radio" name="ratings" id="F" > F
+              </label>
+          </div>  
+          <div id="like">
+              <button type="button" class="btn btn-outline-info ">Like</button>
           </div>
-        <div id="like">
-            <button type="button" class="btn btn-outline-info ">Like</button>
         </div>
-        </div>
+        <!-- Display Ratings and likes -->
+        <div class="d-flex justify-content-between">
+          <div id=currentRating><p>Current rating: A</p></div>
+          <div id="numberOfLikes"><p>123</p></div>
+        </div>  
         <p class="lead"><%= description %></p>
+         <!-- Comments Form -->
+         <div class="card my-4">
+            <h5 class="card-header">Leave a Comment:</h5>
+            <div class="card-body">
+              <form>
+                <div class="form-group">
+                  <textarea class="form-control" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Single Comment -->
+          <div class="media mb-4">
+            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+            <div class="media-body">
+              <h5 class="mt-0">Commenter Name</h5>
+              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+            </div>
+          </div>
+
       </div>
       <div class="col-lg-2"></div>
     </div>
