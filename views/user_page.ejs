@@ -55,8 +55,8 @@
       </div>
       <div class="d-flex justify-content-between mt-5">
         <div class="leftButtons">
-          <button class="btn btn-secondary">My Posts</button>
-          <button class="btn btn-secondary">My Liked Posts</button>
+          <button id="myPosts" class="btn btn-secondary">My Posts</button>
+          <button id="myLikedPosts" class="btn btn-secondary">My Liked Posts</button>
         </div>
         <div class="rightButton">
         Sort By:
@@ -68,11 +68,12 @@
       </div>
     </div>
   </div>
-  <div id="nick">
-
+  <div id="nick" class="container">
+    <div id="collections" class="row text-center text-lg-left">
+    </div>
   </div>
 
-    <script src="../scripts/getUserAvatar.js"></script>
+    <script type="text/javascript" src="/scripts/displayUserOrLikedResources.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   </body>
