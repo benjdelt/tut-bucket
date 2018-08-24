@@ -16,6 +16,16 @@ module.exports = (knex) => {
     });
   });
 
+  
+  router.get("/categories", (req, res) => {
+    knex
+    .select("name")
+    .from("categories")
+    .then((results) => {
+      res.json(results);
+    });
+  });
+  
   router.get("/:id", (req, res) => {
      knex
        .select('*')
@@ -31,15 +41,5 @@ module.exports = (knex) => {
           }
        });
   });
-
-  router.get("/categories", (req, res) => {
-    knex
-      .select("name")
-      .from("categories")
-      .then((results) => {
-        res.json(results);
-    });
-  });
-
   return router;
 }
