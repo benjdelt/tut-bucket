@@ -17,5 +17,10 @@ module.exports = (knex) => {
     
   });
 
+ 
+  router.get("/feature", (req, res) => {
+    res.render("user_page");
+  });
+
   return router;
 }
