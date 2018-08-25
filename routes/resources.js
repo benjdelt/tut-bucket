@@ -70,5 +70,18 @@ module.exports = (knex) => {
     });
   });
 
+  router.post("/:id/likes", (req, res) => {
+    knex('likes')
+      .returning("*")
+      .insert({resources_id: req.params.id, user_id: req.cookies["userId"]})
+      .then((results) => {
+        if(!results.length) {
+          res.status(404).json({error: "Not found"});
+        } else {
+          res.json(results);
+        }
+      });
+  });
+
   return router;
 };

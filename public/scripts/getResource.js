@@ -45,7 +45,7 @@ function getSingleResource() {
                   </label>
                 </div>
               <div id="like">
-                  <button type="button" class="btn btn-outline-info ">Like</button>
+                  <button type="button" data-resource-id="${select_resource.id}" class="btn btn-outline-info ">Like</button>
               </div>
               </div>
               <p class="lead">${select_resource.description}</p>
@@ -56,6 +56,7 @@ function getSingleResource() {
       </div>`
 
       $('body').html(singleResource);
+      getClicks();
 
     })
 
