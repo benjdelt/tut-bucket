@@ -58,8 +58,8 @@ module.exports = (knex) => {
     knex
     .select('*')
     .from("resources")
-    .join("likes", {"likes.resources_id": "resources.id"})
-    .join("users", {"likes.user_id": "users.id"})
+    .join("likes", {"likes.resources_id": resources.id})
+    .join("users", {"likes.user_id": users.id})
     .where({"users.id": req.params.id})
     .then((resources) => {
       if(!resources.length) {
@@ -70,6 +70,8 @@ module.exports = (knex) => {
     });
   });
 
+  // allows db to be updated with like if it doesn't already exist,
+  // and deletes the like if the user has already liked the resource
   router.post("/:id/likes", (req, res) => {
     let duplicate = false;
 
