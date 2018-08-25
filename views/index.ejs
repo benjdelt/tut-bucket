@@ -11,6 +11,8 @@
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/display_resources.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/searchResourcesByTitle.js"></script>
+
   </head>
 
   <body>
@@ -20,8 +22,8 @@
 
       <a href="#" ><img src="images/logo.png" class="navbar-brand" width="60" heigth="80" alt="logo"/></a>
 
-      <form action="/resources" method="GET" class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <form action="resources/search" method="POST" class="form-inline search">
+        <input id="searchfield" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchkey">
       </form>
       <ul class="nav">
         <li class="nav-item">

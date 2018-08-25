@@ -40,6 +40,24 @@ module.exports = (knex) => {
         });
   });
 
+  router.post("/search", (req, res) => {
+    knex
+        .select('*')
+        .from('resources')
+        .join("categories", {"resources.category_id":"categories.id"})
+        .where(knex.raw(`lower(title) like lower('%${req.body.searchkey}%')`))
+        .orWhere(knex.raw(`lower(name) like lower('%${req.body.searchkey}%')`))
+        .then((resources) => {
+          if(!resources.length) {
+            res.json({error: "Not found"});
+          } else {
+            console.log(resources);
+            res.json(resources);
+          }
+        });
+  });
+
+
   router.get("/:id", (req, res) => {
 
     knex
@@ -84,6 +102,8 @@ module.exports = (knex) => {
       }
     });
   });
+
+
 
   return router;
 };
