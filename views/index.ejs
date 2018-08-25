@@ -48,44 +48,46 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form method="POST" action="/resources">
 
-            <div class="modal-body">
+            <form id="newForm" method="POST" action="/resources">
+
+              <div class="modal-body">
                 <div class="form-group">
-                    <label for="newFormTitle">Title</label>
-                <input class="form-control" id="newFormTitle" type="text" name="title" placeholder="Title">
+                  <label for="newFormTitle">Title</label>
+                  <input class="form-control" id="newFormTitle" type="text" name="title" placeholder="Title">
                 </div>
+                
                 <div class="form-group">
-                    <label for="newFormImageUrl">Image</label>
-                <input class="form-control" id="newFormImageUrl" type="text" name="image-url" placeholder="add an image URL">
+                  <label for="newFormImageUrl">Image</label>
+                  <input class="form-control" id="newFormImageUrl" type="text" name="image-url" placeholder="add an image URL">
                 </div>
+                
                 <div class="form-group">
                   <label for="newFormDescription">Description</label>
                   <textarea class="form-control" id="newFormDescription" name="description" placeholder="description"></textarea>
                 </div>
-                <div class="d-flex justify-content-between">
-                <div class="form-group">
-                <div class="dropdown">
-                  <button class="btn btn-primary dropdown-toggle" type="button" id="newFormCategoryButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Category
-                  </button>
-                  <div class="dropdown-menu" id="newFormCategory"aria-labelledby="dropdownMenuLink">
-                  </div>
-                </div>
-                </div>
-                <div class="form-group">
-                    <label for="newFormDescription">URL:</label>
-                <input id="newFormURL" type="text" name="url" placeholder="Link to the resource">
-                </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <input type="submit" class="btn btn-primary"value="Save">
-              </form>
-            </div>
-          </form>
+                
+                <!-- <div class="d-flex justify-content-between"> -->
 
+                  <div class="form-group">
+                      <label for="newFormCategory">Category</label>
+                      <select class="form-control" id="newFormCategory" name="category">
+                      </select>
+                  </div>
+
+                  <div class="form-group">
+                   <label for="newFormURL">URL</label>
+                    <input class="form-control" id="newFormURL" type="text" name="url" placeholder="Link to the resource">
+                  </div>
+                <!-- </div> -->
+              </div>
+              
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input id="newFormSubmit" type="submit" class="btn btn-primary"value="Save">
+              </div>
+            
+            </form>
           </div>
         </div>
       </div>
