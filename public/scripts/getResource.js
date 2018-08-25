@@ -7,6 +7,11 @@ function getSingleResource() {
       url: urlStr
     }).done((resource) => {
       const select_resource = resource[0];
+      $.ajax({
+        method: "GET",
+        url: `resources/categories/${select_resource.category_id}`
+      }).done((result) => {
+        const category = result[0].name;
       var singleResource = `
       <div>
         <main class="container">
@@ -16,9 +21,10 @@ function getSingleResource() {
             </div>
             <div class="col-lg-8">
               <h2 class="mt-4">${select_resource.title}</h2>
+              <p id="resourceCategory">${category}</p>
               <div class="d-flex justify-content-between">
                 <h4> username </h4>
-                <a href="${select_resource.url}">${select_resource.url}</a>
+                <a id="resourceURL" href="${select_resource.url}">${select_resource.url}</a>
               </div>
               <img class="img-fluid rounded mx-auto d-block" src="${select_resource.image_url}"/>
               <p>Posted on ${select_resource.timestamp}</p>
@@ -54,7 +60,7 @@ function getSingleResource() {
                 <div id=currentRating><p>Current rating: A</p></div>
                 <div id="numberOfLikes"><p>123</p></div>
               </div>
-              <p class="lead">${select_resource.description}</p>
+              <p id="resourceDescription" class="lead">${select_resource.description}</p>
               <div class="card my-4">
                  <h5 class="card-header">Leave a Comment:</h5>
                  <div class="card-body">
@@ -75,13 +81,15 @@ function getSingleResource() {
                </div>
             </div>
             <div class="col-lg-2">
-              <a href="#">Edit</a>
+              <a id="editResource" href="#">Edit</a>
             </div>
           </div>
         </main>
       </div>`
-
-      $('body').html(singleResource);
+      
+      $('#navbar, #nick, #jotham').hide();
+      $('#singeResource').append(singleResource);
+    })
     });
 
   });
