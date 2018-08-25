@@ -16,7 +16,6 @@ module.exports = (knex) => {
     });
   });
 
-
   router.get("/categories", (req, res) => {
     knex
     .select("name")
@@ -27,19 +26,18 @@ module.exports = (knex) => {
   });
 
   router.get("/:id", (req, res) => {
+
     knex
-    .select('*')
-    .from("resources")
-    .where({'id': req.params.id})
-    .then((results) => {
-      if(!results.length) {
-        res.status(404).json({error: "Not found"});
-      } else {
-        let templateVars = results[0];
-        console.log(templateVars);
-        res.render("resources_id", templateVars);
-      }
-    });
+       .select('*')
+       .from("resources")
+       .where({'id': req.params.id})
+       .then((results) => {
+          if(!results.length) {
+            res.status(404).json({error: "Not found"});
+          } else {
+            res.json(results);
+          }
+       });
   });
 
   router.get("/users/:id", (req, res) => {
@@ -73,4 +71,4 @@ module.exports = (knex) => {
   });
 
   return router;
-}
+};
