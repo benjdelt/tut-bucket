@@ -25,6 +25,20 @@ module.exports = (knex) => {
     });
   });
 
+  router.get("/categories/:id", (req, res) => {
+    knex
+        .select("*")
+        .from("categories")
+        .where({'id': req.params.id})
+        .then((results) => {
+            if(!results.length) {
+              res.status(404).json({error: "Not found"});
+            } else {
+              res.json(results);
+            }
+        });
+  });
+
   router.get("/:id", (req, res) => {
 
     knex
