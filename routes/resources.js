@@ -17,6 +17,21 @@ module.exports = (knex) => {
     });
   });
 
+  router.get("/:id/comments", (req, res) => {
+    knex
+      .select("comments.id", "comments.resources_id", "comments.text", "comments.timestamp", "users.name")
+      .from("comments")
+      .join('users', {'users.id': 'comments.user_id'})
+      .where({'comments.resources_id': req.params.id})
+      .then((results) => {
+        if (!results.length) {
+          res.json({error: "Not found"});
+        } else {
+          res.json(results);
+        }
+    });
+  });
+
   router.get("/categories", (req, res) => {
     knex
     .select("*")
@@ -70,11 +85,6 @@ module.exports = (knex) => {
           res.json(resources);
         })
       })
-
-    
-  });
-  router.post("/:id", (req, res) => {
-
   });
 
   router.get("/users/:id", (req, res) => {
