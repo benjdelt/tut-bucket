@@ -41,5 +41,10 @@ module.exports = (knex) => {
     });
   });
 
+  router.get("/login/:id", (req, res) => {
+    res.cookie('userId', req.params.id);
+    res.redirect('/');
+  });
+
   return router;
 }
