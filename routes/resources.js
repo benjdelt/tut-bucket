@@ -5,6 +5,7 @@ const router  = express.Router();
 
 const dataHelpers = require('../lib/resources-data-helpers');
 
+
 module.exports = (knex) => {
 
   router.get("/", (req, res) => {
@@ -18,11 +19,26 @@ module.exports = (knex) => {
 
   router.get("/categories", (req, res) => {
     knex
-    .select("name")
+    .select("*")
     .from("categories")
     .then((results) => {
       res.json(results);
     });
+  });
+
+  router.get("/categories/:id", (req, res) => {
+    knex
+        .select("*")
+        .from("categories")
+        .join("resources", {"resources.category_id":"categories.id"})
+        .where({'categories.id': req.params.id})
+        .then((results) => {
+            if(!results.length) {
+              res.status(404).json({error: "Not found"});
+            } else {
+              res.json(results);
+            }
+        });
   });
 
   router.get("/:id", (req, res) => {
@@ -38,6 +54,27 @@ module.exports = (knex) => {
             res.json(results);
           }
        });
+  });
+  
+  router.post("/", (req, res) => {
+    const {title, imageUrl, description, category, url} = req.body;
+    knex
+      .select("id")
+      .from("categories")
+      .where({name: category})
+      .then((resources) => {
+        knex("resources")
+        .insert({url: url, title: title, description: description, image_url: imageUrl, category_id: resources[0].id})
+        .returning("*")
+        .then((resources) => {
+          res.json(resources);
+        })
+      })
+
+    
+  });
+  router.post("/:id", (req, res) => {
+
   });
 
   router.get("/users/:id", (req, res) => {
