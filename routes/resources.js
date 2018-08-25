@@ -84,6 +84,20 @@ module.exports = (knex) => {
           }
        });
   });
+
+  router.get("/:id/ratings", (req, res) => {
+    knex
+       .avg('value')
+       .from("ratings")
+       .where({'resources_id': req.params.id})
+       .then((results) => {
+          if(!results.length) {
+            res.json({error: "Not found"});
+          } else {
+            res.json(Math.floor(results[0].avg));
+          }
+       });
+  });
   
   router.post("/", (req, res) => {
     const {title, imageUrl, description, category, url} = req.body;
@@ -203,7 +217,6 @@ module.exports = (knex) => {
   router.post("/:id/ratings/:value", (req, res) => {
     let duplicate = false;
     let value = changeLetterToValue(req.params.value);
-    console.log('value:', value);
 
     knex
       .count('id')
