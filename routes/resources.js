@@ -220,5 +220,19 @@ module.exports = (knex) => {
       })
   });
 
+
+  // allows db to insert the comment
+  router.post("/:id/comments", (req, res) => {
+    let comment = req.body.commentContent;
+    console.log("comment:", comment);
+  
+    knex('comments')
+    .returning("*")
+    .insert({resources_id: req.params.id, user_id: req.cookies["userId"], text: comment, timestamp: new Date().toISOString()})
+    .then((results) => {
+      res.json(results);
+    });
+  });
+
   return router;
 };
