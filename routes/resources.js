@@ -18,7 +18,7 @@ module.exports = (knex) => {
 
   router.get("/categories", (req, res) => {
     knex
-    .select("name")
+    .select("*")
     .from("categories")
     .then((results) => {
       res.json(results);
@@ -29,7 +29,8 @@ module.exports = (knex) => {
     knex
         .select("*")
         .from("categories")
-        .where({'id': req.params.id})
+        .join("resources", {"resources.category_id":"categories.id"})
+        .where({'categories.id': req.params.id})
         .then((results) => {
             if(!results.length) {
               res.status(404).json({error: "Not found"});

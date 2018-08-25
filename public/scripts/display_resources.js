@@ -3,6 +3,7 @@ $(() => {
     method: "GET",
     url: "/resources"
   }).done((resources) => {
+    $("#collections").html("");
     for (item of resources) {
       var result = `<div class="col-lg-3 col-md-4 col-xs-6">
         <a href="#"  class="d-block mb-4 h-100">
