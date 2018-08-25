@@ -21,27 +21,27 @@ function getSingleResource() {
               <img class="img-fluid rounded mx-auto d-block" src="${select_resource.image_url}"/>
               <p>Posted on ${select_resource.timestamp}</p>
               <div class="d-flex justify-content-between">
-              <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                  <label class="btn btn-success">
-                    <input type="radio" name="ratings" id="A" > A
+              <div id="ratingsContainer" class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label  data-resource-id="${select_resource.id}" class="btn btn-success" id="A">
+                    <input type="radio" name="ratings"> A
                   </label>
-                  <label class="btn btn-success">
-                    <input type="radio" name="ratings" id="B" > B
+                  <label  data-resource-id="${select_resource.id}" class="btn btn-success" id="B">
+                    <input type="radio" name="ratings"> B
                   </label>
-                  <label class="btn btn-warning">
-                    <input type="radio" name="ratings" id="C+" > C+
+                  <label  data-resource-id="${select_resource.id}" class="btn btn-warning" id="C+">
+                    <input type="radio" name="ratings"> C+
                   </label>
-                  <label class="btn btn-warning">
-                      <input type="radio" name="ratings" id="C" > C
+                  <label  data-resource-id="${select_resource.id}" class="btn btn-warning" id="C">
+                      <input type="radio" name="ratings"> C
                   </label>
-                  <label class="btn btn-warning">
-                      <input type="radio" name="ratings" id="C-" > C-
+                  <label  data-resource-id="${select_resource.id}" class="btn btn-warning" id="C-">
+                      <input type="radio" name="ratings"> C-
                     </label>
-                  <label class="btn btn-danger">
-                    <input type="radio" name="ratings" id="D" > D
+                  <label  data-resource-id="${select_resource.id}" class="btn btn-danger" id="D">
+                    <input type="radio" name="ratings"> D
                   </label>
-                  <label class="btn btn-danger">
-                      <input type="radio" name="ratings" id="F" > F
+                  <label  data-resource-id="${select_resource.id}" class="btn btn-danger" id="F">
+                      <input type="radio" name="ratings"> F
                   </label>
                 </div>
               <div id="like">
@@ -56,7 +56,9 @@ function getSingleResource() {
       </div>`
 
       $('body').html(singleResource);
-      getClicks();
+      // start listening for clicks now that the resource is loaded
+      getLikesClicks();
+      getRatingsClicks();
     })
 
   });

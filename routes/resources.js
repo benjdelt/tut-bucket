@@ -115,5 +115,73 @@ module.exports = (knex) => {
       })
   });
 
+  function changeLetterToValue(letter) {
+    switch(letter) {
+      case 'A':
+        return 100;
+      case 'B':
+        return 85;
+      case 'C+':
+        return 75;
+      case 'C':
+        return 70;
+      case 'C-':
+        return 60;
+      case 'D':
+        return 45;
+      case 'F':
+        return 0;
+      default:
+        return 0;
+    }
+  }
+
+  // allows db to be updated with inserting the rating if it doesn't already exist,
+  // and updates the rating if the user has already rated the resource
+  router.post("/:id/ratings/:value", (req, res) => {
+    let duplicate = false;
+    let value = changeLetterToValue(req.params.value);
+    console.log('value:', value);
+
+    knex
+      .count('id')
+      .from('ratings')
+      .where({resources_id: req.params.id})
+      .andWhere({user_id: req.cookies["userId"]})
+      .then((result) => {
+        if(result[0].count > 0) {
+          duplicate = true;
+        }
+      })
+      .then(() => {
+        knex
+        .select('*')
+        .from('ratings')
+        .where({resources_id: req.params.id})
+        .andWhere({user_id: req.cookies["userId"]})
+        .then((result)=> {
+          if(!duplicate) {
+            knex('ratings')
+            .returning("*")
+            .insert({resources_id: req.params.id, user_id: req.cookies["userId"], value})
+            .then((results) => {
+              if(!results.length) {
+                res.status(404).json({error: "Not found"});
+              } else {
+                res.json(results);
+              }
+            });
+          } else {
+            knex('ratings')
+            .where('id', result[0].id)
+            .update({value})
+            .then((result) => {
+              res.json(result);
+            })
+          }
+        });
+      })
+  });
+
   return router;
 };

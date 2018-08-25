@@ -2,11 +2,11 @@ function postLike(resourceId) {
   console.log('resourceId:', resourceId);
   $.post(`/resources/${resourceId}/likes`)
   .done((response) => {
-    updateLikeCount();
+    updateLikeCountClientSide();
   });
 }
 
-function getClicks() {
+function getLikesClicks() {
   $("#like").on("click", (event) => {
     console.log("clicked!");
     let resourceId = $(event.target).attr("data-resource-id");
@@ -14,6 +14,6 @@ function getClicks() {
   })
 }
 
-function updateLikeCount() {
+function updateLikeCountClientSide() {
   console.log("Like Counter Updated...");
 }
