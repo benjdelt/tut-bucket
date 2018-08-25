@@ -57,7 +57,6 @@ function getSingleResource() {
 
       $('body').html(singleResource);
       getClicks();
-
     })
 
   });
