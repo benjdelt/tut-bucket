@@ -16,9 +16,9 @@
   </head>
 
   <body>
-
   <div id="ben">
-    <nav class="navbar fixed-top navbar-light bg-light">
+    <!-- Navbar -->
+    <nav id="navbar" class="navbar fixed-top navbar-light bg-light">
 
       <a href="#" ><img src="images/logo.png" class="navbar-brand" width="60" heigth="80" alt="logo"/></a>
 
@@ -27,19 +27,25 @@
       </form>
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link" href="/users/id">Home</a>
+          <a class="nav-link" href="/users/<%- userId %>">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/resources">Browse</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/resources/new">+</a>
+          <a id="new" class="nav-link" href="#" data-toggle="modal" data-target="#new-resource-form">+</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Logout</a>
         </li>
       </ul>
     </nav>
+
+
+    <!-- Partial for New Resource form modal -->
+    <% include ./partials/_new-form-modal %>
+
+    
   </div>
   <div id="jotham">
     <div id="categories-buttons" class="d-flex p-2" style="overflow:auto;margin-top:100px;"></div>
@@ -47,9 +53,17 @@
   <div id="nick" class="container">
     <div id="collections" class="row text-center text-lg-left">
     </div>
-  </div>
 
+    
+  </div>
+  <div id="singeResource">
+
+  </div>
+    <script src=scripts/new-form.js></script>
     <script src="scripts/getCategoryButtons.js"></script>
+    <script type="text/javascript" src="/scripts/postLike.js"></script>
+    <script type="text/javascript" src="/scripts/postRatings.js"></script>
+    <script type="text/javascript" src="/scripts/postComments.js"></script>
     <script type="text/javascript" src="/scripts/getResource.js"></script>
     <script type="text/javascript" src="/scripts/getResourcesByCategory.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
