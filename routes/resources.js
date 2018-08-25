@@ -83,20 +83,34 @@ module.exports = (knex) => {
           duplicate = true;
         }
       })
-      .then(()=> {
-        if(!duplicate) {
-          knex('likes')
-          .returning("*")
-          .insert({resources_id: req.params.id, user_id: req.cookies["userId"]})
-          .then((results) => {
-            if(!results.length) {
-              res.status(404).json({error: "Not found"});
-            } else {
-              res.json(results);
-            }
-          });
-        }
-      });
+      .then(() => {
+        knex
+        .select('*')
+        .from('likes')
+        .where({resources_id: req.params.id})
+        .andWhere({user_id: req.cookies["userId"]})
+        .then((result)=> {
+          if(!duplicate) {
+            knex('likes')
+            .returning("*")
+            .insert({resources_id: req.params.id, user_id: req.cookies["userId"]})
+            .then((results) => {
+              if(!results.length) {
+                res.status(404).json({error: "Not found"});
+              } else {
+                res.json(results);
+              }
+            });
+          } else {
+            knex('likes')
+            .where('id', result[0].id)
+            .del()
+            .then((result) => {
+              res.json(result);
+            })
+          }
+        });
+      })
   });
 
   return router;
