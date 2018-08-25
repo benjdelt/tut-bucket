@@ -88,7 +88,7 @@ function getSingleResource() {
       </div>`
       
       $('#navbar, #nick, #jotham').hide();
-      $('#singeResource').append(singleResource);
+      $('#singeResource').html(singleResource);
       getLikesClicks();
       getRatingsClicks();
       getCommentsClicks();

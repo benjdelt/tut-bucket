@@ -57,18 +57,29 @@ module.exports = (knex) => {
   });
   
   router.post("/", (req, res) => {
-    const {title, imageUrl, description, category, url} = req.body;
+    const {id, title, imageUrl, description, category, url} = req.body;
     knex
-      .select("id")
-      .from("categories")
-      .where({name: category})
-      .then((resources) => {
-        knex("resources")
-        .insert({url: url, title: title, description: description, image_url: imageUrl, category_id: resources[0].id, timestamp: new Date().toISOString()})
-        .returning("*")
-        .then((resources) => {
-          res.json(resources);
-        })
+    .select("id")
+    .from("categories")
+    .where({name: category})
+    .then((resources) => {
+        if (id) {
+          console.log("It's an update!");
+          knex("resources")
+            .where({id: id})
+            .update({url: url, title: title, description: description, image_url: imageUrl, category_id: resources[0].id})
+            .returning('*')
+            .then((resources) => {
+              res.json(resources);
+            }) 
+        } else {
+          knex("resources")
+          .insert({url: url, title: title, description: description, image_url: imageUrl, category_id: resources[0].id, timestamp: new Date().toISOString()})
+          .returning("*")
+          .then((resources) => {
+            res.json(resources);
+          })
+        }
       })
 
     

@@ -137,7 +137,7 @@ $(() => {
       </div>`
       
       $('#navbar, #nick, #jotham').hide();
-      $('#singeResource').append(singleResource);
+      $('#singeResource').html(singleResource);
     })
     });
 
