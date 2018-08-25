@@ -5,6 +5,7 @@ const router  = express.Router();
 
 const dataHelpers = require('../lib/resources-data-helpers');
 
+
 module.exports = (knex) => {
 
   router.get("/", (req, res) => {
@@ -55,7 +56,21 @@ module.exports = (knex) => {
   });
   
   router.post("/", (req, res) => {
+    const {title, imageUrl, description, category, url} = req.body;
+    knex
+      .select("id")
+      .from("categories")
+      .where({name: category})
+      .then((resources) => {
+        knex("resources")
+        .insert({url: url, title: title, description: description, image_url: imageUrl, category_id: resources[0].id})
+        .returning("*")
+        .then((resources) => {
+          res.json(resources);
+        })
+      })
 
+    
   });
   router.post("/:id", (req, res) => {
 

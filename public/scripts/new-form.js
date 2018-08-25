@@ -23,9 +23,11 @@ $(() => {
     const newResource = $("#newForm").serialize();
     $("#new-resource-form").modal("toggle");
 
-    // To do
+    $.post("/resources", newResource).done((response) => {
+      $("#newForm").trigger("reset");
 
-    $("#newForm").trigger("reset");
+    });
+
   })
   
 })
