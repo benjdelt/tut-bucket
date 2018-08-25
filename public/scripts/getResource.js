@@ -1,5 +1,5 @@
 function getSingleResource() {
-  $("#collections a").on("click", function(event) {
+  $("#collections div.singleSource").on("click", function(event) {
     event.preventDefault();
     const urlStr = `/resources/${event.target.dataset.tag}`;
     $.ajax({
