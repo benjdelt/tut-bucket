@@ -2,6 +2,7 @@ $(() => {
 
   // Getting categories for the new resource form
   function getCategories(cat) {
+    $("#newFormCategory").html('');
     $.ajax("/resources/categories", {method:"GET"})
     .then((categoriesObject) => {
     for (category in categoriesObject) {
