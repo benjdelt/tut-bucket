@@ -2,13 +2,14 @@
 
 require('dotenv').config();
 
-const PORT        = process.env.PORT || 8080;
-const ENV         = process.env.ENV || "development";
-const express     = require("express");
-const session     = require("express-session");
-const bodyParser  = require("body-parser");
-const sass        = require("node-sass-middleware");
-const app         = express();
+const PORT          = process.env.PORT || 8080;
+const ENV           = process.env.ENV || "development";
+const express       = require("express");
+const bodyParser    = require("body-parser");
+const cookieParser  = require('cookie-parser');
+const session       = require("express-session");
+const sass          = require("node-sass-middleware");
+const app           = express();
 
 const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
@@ -18,7 +19,12 @@ const knexLogger  = require('knex-logger');
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
 const resourcesRoutes = require("./routes/resources");
-app.use(session({secret:"Most secure login ever"}));
+
+app.use(cookieParser());
+app.use(session({
+  secret: 'Most secure login ever'
+}));
+
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -45,7 +51,7 @@ app.use("/resources", resourcesRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index", {userId: req.cookies.userId});
 });
 
 app.listen(PORT, () => {

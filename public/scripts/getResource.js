@@ -29,31 +29,31 @@ function getSingleResource() {
               <img class="img-fluid rounded mx-auto d-block" src="${select_resource.image_url}"/>
               <p>Posted on ${select_resource.timestamp}</p>
               <div class="d-flex justify-content-between">
-              <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                  <label class="btn btn-success">
-                    <input type="radio" name="ratings" id="A" > A
+              <div id="ratingsContainer" class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label  data-resource-id="${select_resource.id}" class="btn btn-success" id="A">
+                    <input type="radio" name="ratings"> A
                   </label>
-                  <label class="btn btn-success">
-                    <input type="radio" name="ratings" id="B" > B
+                  <label  data-resource-id="${select_resource.id}" class="btn btn-success" id="B">
+                    <input type="radio" name="ratings"> B
                   </label>
-                  <label class="btn btn-warning">
-                    <input type="radio" name="ratings" id="C+" > C+
+                  <label  data-resource-id="${select_resource.id}" class="btn btn-warning" id="C+">
+                    <input type="radio" name="ratings"> C+
                   </label>
-                  <label class="btn btn-warning">
-                      <input type="radio" name="ratings" id="C" > C
+                  <label  data-resource-id="${select_resource.id}" class="btn btn-warning" id="C">
+                      <input type="radio" name="ratings"> C
                   </label>
-                  <label class="btn btn-warning">
-                      <input type="radio" name="ratings" id="C-" > C-
+                  <label  data-resource-id="${select_resource.id}" class="btn btn-warning" id="C-">
+                      <input type="radio" name="ratings"> C-
                     </label>
-                  <label class="btn btn-danger">
-                    <input type="radio" name="ratings" id="D" > D
+                  <label  data-resource-id="${select_resource.id}" class="btn btn-danger" id="D">
+                    <input type="radio" name="ratings"> D
                   </label>
-                  <label class="btn btn-danger">
-                      <input type="radio" name="ratings" id="F" > F
+                  <label  data-resource-id="${select_resource.id}" class="btn btn-danger" id="F">
+                      <input type="radio" name="ratings"> F
                   </label>
                 </div>
               <div id="like">
-                  <button type="button" class="btn btn-outline-info ">Like</button>
+                  <button type="button" data-resource-id="${select_resource.id}" class="btn btn-outline-info ">Like</button>
               </div>
               </div>
               <div class="d-flex justify-content-between">
@@ -64,9 +64,9 @@ function getSingleResource() {
               <div class="card my-4">
                  <h5 class="card-header">Leave a Comment:</h5>
                  <div class="card-body">
-                   <form>
+                   <form id="commentForm" data-resource-id="${select_resource.id}">
                      <div class="form-group">
-                       <textarea class="form-control" rows="3"></textarea>
+                       <textarea id="commentText" class="form-control" rows="3" name="commentContent"></textarea>
                      </div>
                      <button type="submit" class="btn btn-primary">Submit</button>
                    </form>
@@ -89,6 +89,10 @@ function getSingleResource() {
       
       $('#navbar, #nick, #jotham').hide();
       $('#singeResource').append(singleResource);
+      getLikesClicks();
+      getRatingsClicks();
+      getCommentsClicks();
+
     })
     });
 
