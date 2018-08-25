@@ -16,10 +16,14 @@ $.ajax("/resources/categories", {method:"GET"})
     for (category in categoriesObject) {
       let color = randomColor();
       $("<button>")
+      .attr("id",`${categoriesObject[category].id}`)
       .attr("class","btn mr-3")
       .html(`${categoriesObject[category].name}`)
       .css("background-color", color)
       .appendTo($("#categories-buttons"));
     }
+
+    getResourcesByName();
+
+
   });
-  

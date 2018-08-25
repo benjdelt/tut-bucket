@@ -82,7 +82,7 @@ function getSingleResource() {
       </div>`
 
       $('body').html(singleResource);
-    })
+    });
 
   });
 }
