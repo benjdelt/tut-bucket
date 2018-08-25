@@ -70,6 +70,20 @@ module.exports = (knex) => {
           }
        });
   });
+
+  router.get("/:id/likes", (req, res) => {
+    knex
+       .count('id')
+       .from("likes")
+       .where({'resources_id': req.params.id})
+       .then((results) => {
+          if(!results.length) {
+            res.json({error: "Not found"});
+          } else {
+            res.json(results);
+          }
+       });
+  });
   
   router.post("/", (req, res) => {
     const {title, imageUrl, description, category, url} = req.body;
@@ -125,6 +139,7 @@ module.exports = (knex) => {
     knex
       .count('id')
       .from('likes')
+      .returning("*")
       .where({resources_id: req.params.id})
       .andWhere({user_id: req.cookies["userId"]})
       .then((result) => {

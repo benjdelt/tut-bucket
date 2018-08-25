@@ -52,39 +52,44 @@ function getSingleResource() {
               </div>
               <div class="d-flex justify-content-between">
                 <div id=currentRating><p>Current rating: A</p></div>
-                <div id="numberOfLikes"><p>123</p></div>
+                <div id="numberOfLikes"><p>`;
+              getLikes(select_resource.id)
+              .then((numLikes) => {
+                singleResource += numLikes[0].count;
+                singleResource += `</p></div>
+                </div>
+                <p class="lead">${select_resource.description}</p>
+                <div class="card my-4">
+                  <h5 class="card-header">Leave a Comment:</h5>
+                  <div class="card-body">
+                    <form id="commentForm" data-resource-id="${select_resource.id}">
+                      <div class="form-group">
+                        <textarea id="commentText" class="form-control" rows="3" name="commentContent"></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                  </div>
+                </div>
               </div>
-              <p class="lead">${select_resource.description}</p>
-              <div class="card my-4">
-                 <h5 class="card-header">Leave a Comment:</h5>
-                 <div class="card-body">
-                   <form id="commentForm" data-resource-id="${select_resource.id}">
-                     <div class="form-group">
-                       <textarea id="commentText" class="form-control" rows="3" name="commentContent"></textarea>
-                     </div>
-                     <button type="submit" class="btn btn-primary">Submit</button>
-                   </form>
-                 </div>
-               </div>
-            </div>
-            <div class="col-lg-2">
-              <a href="#">Edit</a>
-            </div>`
-      getComments(select_resource.id)
-      .then((comment) => {
-        if(comment) {
-          singleResource += comment; 
-        }
-        singleResource += 
-            `</div>
-          </main>
-        </div>`
-        $('body').html(singleResource);
-        // start listening for clicks now that the resource is loaded
-        getLikesClicks();
-        getRatingsClicks();
-        getCommentsClicks();
-      }) 
+              <div class="col-lg-2">
+                <a href="#">Edit</a>
+              </div>`;
+        getComments(select_resource.id)
+        .then((comment) => {
+          if(comment) {
+            singleResource += comment; 
+          }
+          singleResource += 
+              `</div>
+            </main>
+          </div>`;
+          $('body').html(singleResource);
+          // start listening for clicks now that the resource is loaded
+          getLikesClicks();
+          getRatingsClicks();
+          getCommentsClicks();
+        }) 
+      })
     })
   });
 }

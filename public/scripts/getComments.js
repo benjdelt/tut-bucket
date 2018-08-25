@@ -7,7 +7,7 @@ function getComments(resourceId) {
         allComments += 
         `<div class="media mb-4">
           <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-          <div class="media-body">
+          <div class="media-body" data-comment-id="${comment.id}">
             <h5 class="mt-0">${comment.name}</h5>
             ${comment.text}
           </div>
@@ -18,5 +18,4 @@ function getComments(resourceId) {
   })
 
   return promise;
-  // return allComments;
 }
