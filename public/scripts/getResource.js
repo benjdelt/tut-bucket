@@ -20,7 +20,7 @@ function getSingleResource() {
               <a href="/">Back</a>
             </div>
             <div class="col-lg-8">
-              <h2 class="mt-4">${select_resource.title}</h2>
+              <h2 data-resourceId ="${select_resource.id}" class="mt-4">${select_resource.title}</h2>
               <p id="resourceCategory">${category}</p>
               <div class="d-flex justify-content-between">
                 <h4> username </h4>

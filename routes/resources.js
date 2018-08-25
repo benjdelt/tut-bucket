@@ -64,7 +64,7 @@ module.exports = (knex) => {
       .where({name: category})
       .then((resources) => {
         knex("resources")
-        .insert({url: url, title: title, description: description, image_url: imageUrl, category_id: resources[0].id})
+        .insert({url: url, title: title, description: description, image_url: imageUrl, category_id: resources[0].id, timestamp: new Date().toISOString()})
         .returning("*")
         .then((resources) => {
           res.json(resources);

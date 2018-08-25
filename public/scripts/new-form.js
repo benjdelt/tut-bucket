@@ -1,4 +1,4 @@
-$(() => {
+$(() => { 
 
   // Getting categories for the new resource form
   function getCategories(cat) {
@@ -69,7 +69,7 @@ $(() => {
               <a href="/">Back</a>
             </div>
             <div class="col-lg-8">
-              <h2 class="mt-4">${select_resource.title}</h2>
+              <h2 data-resourceId ="${select_resource.id}" class="mt-4">${select_resource.title}</h2>
               <p id="resourceCategory">${category}</p>
               <div class="d-flex justify-content-between">
                 <h4> username </h4>
@@ -153,6 +153,8 @@ $(() => {
     getCategories($("#resourceCategory").text());
     $("#modalTitle").text("Edit Resource");
     // Prepopulate form with elements from the page
+    console.log($('h2').attr('data-resourceId'));
+    $("#newFormId").attr("value", $('h2').attr('data-resourceId'));
     $("#newFormTitle").attr("value", $("h2").text());
     $("#newFormImageUrl").attr("value", $("main img").attr("src"));
     $("#newFormDescription").html($("#resourceDescription").text());
