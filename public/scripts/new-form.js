@@ -1,4 +1,4 @@
-$(() => { 
+$(() => {
   // Getting categories for the new resource form
   function getCategories(cat) {
     $("#newFormCategory").html('');
@@ -22,7 +22,7 @@ $(() => {
           .html(`${categoriesObject[category].name}`)
           .appendTo($("#newFormCategory"));
         }
-        
+
       } else {
         $("<option>")
           .attr("class","dropdown-item")
@@ -35,8 +35,8 @@ $(() => {
     });
   }
 
-  $("#new").on("click", () => {    
-    $("#newForm").trigger("reset");    
+  $("#new").on("click", () => {
+    $("#newForm").trigger("reset");
     $("#modalTitle").text("New Resource");
     $("#newFormId").attr("value", "");
     $("#newFormTitle").attr("value", "");
@@ -60,12 +60,12 @@ $(() => {
         $.ajax({method: "GET", url: `resources/categories/${select_resource.category_id}`})
         .done((result) => {
         const category = result[0].name;
-        getSingleResourceTemplate(category, select_resource);    
+        getSingleResourceTemplate(category, select_resource);
         })
       });
     });
   });
-  
+
   $("body").on("click", "#editResource", (event) => {
     event.preventDefault();
     $("#newForm").trigger("reset");
@@ -84,15 +84,15 @@ $(() => {
 
     // Confirmation for delete button
     $('[data-toggle=confirmation]').confirmation({
-      rootSelector: '[data-toggle=confirmation]'  
+      rootSelector: '[data-toggle=confirmation]'
     })
     $("body").on("click", "#deleteResource", (event) => {
         $.post(`/resources/${resourceId}`, resourceId).done((response) => {
           $("#newForm").trigger("reset");
           $("#new-resource-form").modal("toggle");
 
-        $('#singeResource').empty();
-        
+        $('#singleResource').empty();
+
         $.ajax({
           method: "GET",
           url: "/resources"
@@ -101,12 +101,13 @@ $(() => {
           for (item of resources) {
             var result = `<div class="col-lg-3 col-md-4 col-xs-6 d-block mb-4 h-100 singleSource">
                 <img data-tag="${item.id}" class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
-                <div class="carousel-caption">
+                <div class="carousel-caption overlay">
                   <h5 data-tag="${item.id}">${item.title}</h5>
                 </div>
             </div>`;
             $("#collections").append(result);
           }
+
           getSingleResource()
         });
         $('#navbar, #nick, #jotham').show();
