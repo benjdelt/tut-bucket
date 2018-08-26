@@ -7,8 +7,7 @@ const dataHelpers = require('../lib/resources-data-helpers');
 
 
 function areNotEmpty(field) {
-  console.log(field);
-  return field.every((e) => e.trim());
+  return field.every((e) => String(e).trim());
 }
 
 
@@ -126,39 +125,46 @@ module.exports = (knex) => {
   router.post("/", (req, res) => {
     const {id, title, imageUrl, description, category, url} = req.body;
     // Form validation Server side
-    if(areNotEmpty([title, description, category, url])) {
+    console.log("cookie is", typeof (req.cookies["userId"]));
+    if(areNotEmpty([title, description, category, url]) && req.cookies["userId"]) {
+      // Update db
       knex
       .select("id")
       .from("categories")
       .where({name: category})
       .then((resources) => {
-          if (id) {
-            console.log("It's an update!");
-            knex("resources")
-              .where({id: id})
-              .update({url: url, title: title, description: description, image_url: imageUrl, category_id: resources[0].id})
-              .returning('*')
-              .then((resources) => {
-                res.json(resources);
-              }) 
-          } else {
-            knex("resources")
-            .insert({url: url, title: title, description: description, image_url: imageUrl, category_id: resources[0].id, timestamp: new Date().toISOString()})
+        // Update
+        if (id) {
+          knex("resources")
+            .where({id: id})
+            .andWhere({user_id: req.cookies["userId"]})
+            .update({url: url, title: title, description: description, image_url: imageUrl, category_id: resources[0].id})
+            .returning('*')
+            .then((resources) => {
+              res.json(resources);
+            }) 
+        // Create new resource
+        } else {
+          knex("resources")
+            .insert({url: url, user_id: req.cookies["userId"], title: title, description: description, image_url: imageUrl, category_id: resources[0].id, timestamp: new Date().toISOString()})
             .returning("*")
             .then((resources) => {
               res.json(resources);
             })
-          }
-        })
+        }
+      })
     } else {
       res.status(400).json({error: "invalid form submission"});
     }
 
 
   });
+
+  // Delete resource
   router.post("/:id", (req, res) => {
     knex("resources")
       .where({id: req.params.id})
+      .andWhere({user_id: req.cookies["userId"]})
       .del()
       .then((results) => {
         res.json(results);
