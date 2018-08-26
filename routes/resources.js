@@ -72,7 +72,6 @@ module.exports = (knex) => {
           if(!resources.length) {
             res.json({error: "Not found"});
           } else {
-            console.log(resources);
             res.json(resources);
           }
         });
@@ -121,7 +120,7 @@ module.exports = (knex) => {
           }
        });
   });
-  
+
   router.post("/", (req, res) => {
     const {id, title, imageUrl, description, category, url} = req.body;
     // Form validation Server side
@@ -142,7 +141,8 @@ module.exports = (knex) => {
             .returning('*')
             .then((resources) => {
               res.json(resources);
-            }) 
+
+            })
         // Create new resource
         } else {
           knex("resources")

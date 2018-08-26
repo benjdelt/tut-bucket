@@ -2,6 +2,7 @@ function getSingleResource() {
   $("#collections div.singleSource").on("click", function(event) {
     event.preventDefault();
     const urlStr = `/resources/${event.target.dataset.tag}`;
+    console.log(urlStr);
     $.ajax({
       method: "GET",
       url: urlStr
@@ -12,7 +13,7 @@ function getSingleResource() {
         url: `resources/categories/${select_resource.category_id}`
       }).done((result) => {
         const category = result[0].name;
-        getSingleResourceTemplate(category, select_resource); 
+        getSingleResourceTemplate(category, select_resource);
       });
     });
   });

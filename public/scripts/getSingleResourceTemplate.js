@@ -7,10 +7,7 @@ function getSingleResourceTemplate(category, select_resource) {
         <div>
           <main class="container">
             <div class="row">
-              <div class="col-lg-2">
-                <a href="/">Back</a>
-              </div>
-              <div class="col-lg-8">
+              <div class="col-lg-8" style="margin:100px;">
                 <h2 data-resourceId ="${select_resource.id}" class="mt-4">${select_resource.title}</h2>
                 <p id="resourceCategory">${category}</p>
                 <div class="d-flex justify-content-between">
@@ -95,7 +92,8 @@ function getSingleResourceTemplate(category, select_resource) {
         </div>`;
 
         $('#nick, #jotham').hide();
-        $('#singeResource').html(singleResource);
+        $('#editResource').css("visibility", "visible");
+        $('#singleResource').html(singleResource);
         getLikesClicks();
         getRatingsClicks();
         getCommentsClicks();

@@ -37,7 +37,7 @@ function listenForUserPageRequest() {
         </div>
       </div>
       <script type="text/javascript" src="/scripts/displayUserCollections.js"></script>`;        
-      $('#nick, #singeResource').hide();
+      $('#nick, #singleResource').hide();
       $('#singleUser').html(singleUser);
       getLikesClicks();
       getRatingsClicks();
