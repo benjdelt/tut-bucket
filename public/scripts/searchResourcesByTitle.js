@@ -1,12 +1,12 @@
 $(() => {
   $('#search').on('submit', function (e) {
     e.preventDefault();
-    $('#singeResource').hide();
+    $('#singleResource').hide();
+    $('#editResource').css("visibility", "hidden");
     $('#nick, #jotham').css("display", "inline");
     const key = $(this).serialize()
     $.post('/resources/search', key)
     .done((resources) => {
-        console.log("AJAX CALL");
         $("#collections").html("");
         if (resources.length === undefined) {
           console.log("ERRORRRR");
@@ -21,7 +21,10 @@ $(() => {
             $("#collections").append(result);
           }
         }
-        getSingleResource()
+        $('#singleResource').html('');
+        getSingleResource();
+        $('#singleResource').css("display", "inline");
+        $('#editResource').css("visibility", "visible");
       });
   });
 });

@@ -6,6 +6,11 @@ const router  = express.Router();
 const dataHelpers = require('../lib/resources-data-helpers');
 
 
+function areNotEmpty(field) {
+  return field.every((e) => String(e).trim());
+}
+
+
 module.exports = (knex) => {
 
   router.get("/", (req, res) => {
@@ -118,31 +123,52 @@ module.exports = (knex) => {
 
   router.post("/", (req, res) => {
     const {id, title, imageUrl, description, category, url} = req.body;
-    knex
-    .select("id")
-    .from("categories")
-    .where({name: category})
-    .then((resources) => {
+    // Form validation Server side
+    console.log("cookie is", typeof (req.cookies["userId"]));
+    if(areNotEmpty([title, description, category, url]) && req.cookies["userId"]) {
+      // Update db
+      knex
+      .select("id")
+      .from("categories")
+      .where({name: category})
+      .then((resources) => {
+        // Update
         if (id) {
-          console.log("It's an update!");
           knex("resources")
             .where({id: id})
+            .andWhere({user_id: req.cookies["userId"]})
             .update({url: url, title: title, description: description, image_url: imageUrl, category_id: resources[0].id})
             .returning('*')
             .then((resources) => {
               res.json(resources);
+
             })
+        // Create new resource
         } else {
           knex("resources")
-          .insert({url: url, title: title, description: description, image_url: imageUrl, category_id: resources[0].id, timestamp: new Date().toISOString()})
-          .returning("*")
-          .then((resources) => {
-            res.json(resources);
-          })
+            .insert({url: url, user_id: req.cookies["userId"], title: title, description: description, image_url: imageUrl, category_id: resources[0].id, timestamp: new Date().toISOString()})
+            .returning("*")
+            .then((resources) => {
+              res.json(resources);
+            })
         }
       })
+    } else {
+      res.status(400).json({error: "invalid form submission"});
+    }
 
 
+  });
+
+  // Delete resource
+  router.post("/:id", (req, res) => {
+    knex("resources")
+      .where({id: req.params.id})
+      .andWhere({user_id: req.cookies["userId"]})
+      .del()
+      .then((results) => {
+        res.json(results);
+      })
   });
 
   router.get("/users/:id", (req, res) => {
@@ -163,8 +189,8 @@ module.exports = (knex) => {
     knex
     .select('*')
     .from("resources")
-    .join("likes", {"likes.resources_id": resources.id})
-    .join("users", {"likes.user_id": users.id})
+    .join("likes", {"likes.resources_id": "resources.id"})
+    .join("users", {"likes.user_id": "users.id"})
     .where({"users.id": req.params.id})
     .then((resources) => {
       if(!resources.length) {
