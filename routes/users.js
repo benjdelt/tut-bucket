@@ -36,8 +36,18 @@ module.exports = (knex) => {
           email: result[0].email,
           avatar: result[0].avatar_url
         }
-        console.log(templateVars);
         res.render("user_page", templateVars);
+    });
+  });
+
+  router.get("/:id/user", (req, res) => {
+    knex
+      .select("*")
+      .from("users")
+      .where({id: req.params.id})
+      .then((result) => {
+        console.log(result);
+        res.json(result);
     });
   });
 

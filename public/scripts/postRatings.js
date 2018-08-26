@@ -1,7 +1,7 @@
 function postRatings(resourceId, value) {
   $.post(`/resources/${resourceId}/ratings/${value}`)
   .done((response) => {
-    updateRatingClientSide();
+    updateRatingClientSide(resourceId);
   });
 }
 
@@ -13,6 +13,10 @@ function getRatingsClicks() {
   })
 }
 
-function updateRatingClientSide() {
-  console.log("Rating Updated...");
+function updateRatingClientSide(resourceId) {
+  $.ajax({method: "GET", url: `/resources/${resourceId}/ratings`})
+  .then((rating) => {
+    let letterGrade = changeValuetoLetter(rating);
+    $("#currentRating > p > span").html(letterGrade);
+  })
 }

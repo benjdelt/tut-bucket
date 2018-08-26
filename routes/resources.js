@@ -17,6 +17,21 @@ module.exports = (knex) => {
     });
   });
 
+  router.get("/:id/comments", (req, res) => {
+    knex
+      .select("comments.id", "comments.resources_id", "comments.text", "comments.timestamp", "users.name")
+      .from("comments")
+      .join('users', {'users.id': 'comments.user_id'})
+      .where({'comments.resources_id': req.params.id})
+      .then((results) => {
+        if (!results.length) {
+          res.json({error: "Not found"});
+        } else {
+          res.json(results);
+        }
+    });
+  });
+
   router.get("/categories", (req, res) => {
     knex
     .select("*")
@@ -74,6 +89,34 @@ module.exports = (knex) => {
        });
   });
 
+  router.get("/:id/likes", (req, res) => {
+    knex
+       .count('id')
+       .from("likes")
+       .where({'resources_id': req.params.id})
+       .then((results) => {
+          if(!results.length) {
+            res.json({error: "Not found"});
+          } else {
+            res.json(results);
+          }
+       });
+  });
+
+  router.get("/:id/ratings", (req, res) => {
+    knex
+       .avg('value')
+       .from("ratings")
+       .where({'resources_id': req.params.id})
+       .then((results) => {
+          if(!results.length) {
+            res.json({error: "Not found"});
+          } else {
+            res.json(Math.floor(results[0].avg));
+          }
+       });
+  });
+  
   router.post("/", (req, res) => {
     const {id, title, imageUrl, description, category, url} = req.body;
     knex
@@ -149,6 +192,7 @@ module.exports = (knex) => {
     knex
       .count('id')
       .from('likes')
+      .returning("*")
       .where({resources_id: req.params.id})
       .andWhere({user_id: req.cookies["userId"]})
       .then((result) => {
@@ -212,7 +256,6 @@ module.exports = (knex) => {
   router.post("/:id/ratings/:value", (req, res) => {
     let duplicate = false;
     let value = changeLetterToValue(req.params.value);
-    console.log('value:', value);
 
     knex
       .count('id')
