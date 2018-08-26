@@ -14,6 +14,7 @@ function displayUserResources() {
             </div>
           </a>
         </div>`;
+        $("#jotham").css("display","block");
         $("#userCollections").append(result);
       }
     }
