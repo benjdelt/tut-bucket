@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.text('text');
     table.datetime('timestamp');
-    table.integer('resources_id').references('resources.id');
+    table.integer('resources_id').references('resources.id').onDelete('CASCADE');
     table.integer('user_id').references('users.id');
   });
 };
