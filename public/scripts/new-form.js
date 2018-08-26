@@ -149,6 +149,8 @@ $(() => {
   $("body").on("click", "#editResource", (event) => {
     event.preventDefault();
     $("#newForm").trigger("reset");
+    $("#deleteResource").remove();
+    $("#newForm > .modal-footer").prepend($(`<button type="button" id="deleteResource" class="btn btn-danger" data-toggle="confirmation"">Delete</button>`));
     $("#new-resource-form").modal("toggle");
     getCategories($("#resourceCategory").text());
     $("#modalTitle").text("Edit Resource");
@@ -160,6 +162,13 @@ $(() => {
     $("#newFormDescription").html($("#resourceDescription").text());
     $("#newFormURL").attr("value", $("#resourceURL").text());
 
+    // Confirmation for delete button
+    $('[data-toggle=confirmation]').confirmation({
+      rootSelector: '[data-toggle=confirmation]'  
+    })
+    $("body").on("click", "#deleteResource", (event) => {
+      
+    })
 
   });
 
