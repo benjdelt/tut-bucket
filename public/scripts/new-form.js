@@ -38,6 +38,20 @@ $(() => {
   }
 
   $("#new").on("click", () => {
+    
+    
+    
+    $("#newForm").trigger("reset");    
+    $("#modalTitle").text("New Resource");
+    $("#newFormId").attr("value", "");
+    $("#newFormTitle").attr("value", "");
+    $("#newFormImageUrl").attr("value", "");
+    $("#newFormDescription").html("");
+    $("#newFormURL").attr("value", "");
+
+
+
+    $("#deleteResource").remove();
     getCategories(null);
   })
 
@@ -168,7 +182,9 @@ $(() => {
     })
     $("body").on("click", "#deleteResource", (event) => {
         $.post(`/resources/${resourceId}`, resourceId).done((response) => {
-        $("#new-resource-form").modal("toggle");
+          $("#newForm").trigger("reset");
+          $("#new-resource-form").modal("toggle");
+
         $('#singeResource').empty();
         
         $.ajax({
