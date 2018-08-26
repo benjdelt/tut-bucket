@@ -56,6 +56,24 @@ module.exports = (knex) => {
         });
   });
 
+  router.post("/search", (req, res) => {
+    knex
+        .select('*')
+        .from('resources')
+        .join("categories", {"resources.category_id":"categories.id"})
+        .where(knex.raw(`lower(title) like lower('%${req.body.searchkey}%')`))
+        .orWhere(knex.raw(`lower(name) like lower('%${req.body.searchkey}%')`))
+        .then((resources) => {
+          if(!resources.length) {
+            res.json({error: "Not found"});
+          } else {
+            console.log(resources);
+            res.json(resources);
+          }
+        });
+  });
+
+
   router.get("/:id", (req, res) => {
 
     knex
@@ -100,19 +118,32 @@ module.exports = (knex) => {
   });
   
   router.post("/", (req, res) => {
-    const {title, imageUrl, description, category, url} = req.body;
+    const {id, title, imageUrl, description, category, url} = req.body;
     knex
-      .select("id")
-      .from("categories")
-      .where({name: category})
-      .then((resources) => {
-        knex("resources")
-        .insert({url: url, title: title, description: description, image_url: imageUrl, category_id: resources[0].id})
-        .returning("*")
-        .then((resources) => {
-          res.json(resources);
-        })
+    .select("id")
+    .from("categories")
+    .where({name: category})
+    .then((resources) => {
+        if (id) {
+          console.log("It's an update!");
+          knex("resources")
+            .where({id: id})
+            .update({url: url, title: title, description: description, image_url: imageUrl, category_id: resources[0].id})
+            .returning('*')
+            .then((resources) => {
+              res.json(resources);
+            }) 
+        } else {
+          knex("resources")
+          .insert({url: url, title: title, description: description, image_url: imageUrl, category_id: resources[0].id, timestamp: new Date().toISOString()})
+          .returning("*")
+          .then((resources) => {
+            res.json(resources);
+          })
+        }
       })
+
+
   });
 
   router.get("/users/:id", (req, res) => {
@@ -263,7 +294,7 @@ module.exports = (knex) => {
   router.post("/:id/comments", (req, res) => {
     let comment = req.body.commentContent;
     console.log("comment:", comment);
-  
+
     knex('comments')
     .returning("*")
     .insert({resources_id: req.params.id, user_id: req.cookies["userId"], text: comment, timestamp: new Date().toISOString()})
