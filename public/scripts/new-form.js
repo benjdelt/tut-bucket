@@ -40,7 +40,7 @@ $(() => {
   $("#new").on("click", () => {
     
     
-    
+    // Empty the file
     $("#newForm").trigger("reset");    
     $("#modalTitle").text("New Resource");
     $("#newFormId").attr("value", "");
