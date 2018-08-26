@@ -20,21 +20,19 @@
   <div id="ben">
     <!-- Navbar -->
     <nav id="navbar" class="navbar fixed-top navbar-light bg-light">
-
-      <!-- <a href="#" ><img src="images/logo.png" class="navbar-brand" width="60" heigth="80" alt="logo"/></a> -->
       <a href="#" ><img src="images/pyramid.png" class="navbar-brand" width="60" heigth="80" alt="logo"/></a>
 
       <form action="resources/search" method="POST" class="form-inline search">
         <input id="searchfield" class="form-control form-control-lg" type="text" placeholder="Search" aria-label="Search" name="searchkey">
       </form>
       <div class="btn-group">
-        <button type="button" class="nav-link btn btn-info" href="/users/<%- userId %>">Home</a>
-        <button type="button" class="nav-link btn btn-info" href="/resources">Browse</a>
-        <button type="button" class="nav-link btn btn-outline-info" href="#">Logout</a>
+        <a class="nav-link btn btn-info" href="/users/<%- userId %>">Home</a>
+        <a class="nav-link btn btn-info" href="/resources">Browse</a>
+        <a class="nav-link btn btn-outline-info" href="#">Logout</a>
       </div>
 
       <div class="btn-toolbar">
-        <button type="button" id="new" class="nav-link btn btn-outline-secondary" href="#" data-toggle="modal" data-target="#new-resource-form">+</button>
+        <a id="new" class="nav-link btn btn-outline-secondary" href="#" data-toggle="modal" data-target="#new-resource-form">+</a>
       </div>
 
     </nav>
