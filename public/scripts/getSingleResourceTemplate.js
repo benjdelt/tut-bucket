@@ -3,10 +3,8 @@ function getSingleResourceTemplate(category, select_resource) {
       <div>
         <main class="container">
           <div class="row">
-            <div class="col-lg-2">
-              <a href="/">Back</a>
-            </div>
-            <div class="col-lg-8">
+
+            <div class="col-lg-8" style="margin:100px;">
               <h2 data-resourceId ="${select_resource.id}" class="mt-4">${select_resource.title}</h2>
               <p id="resourceCategory">${category}</p>
               <div class="d-flex justify-content-between">
@@ -47,9 +45,9 @@ function getSingleResourceTemplate(category, select_resource) {
                 <div id=currentRating>
                   <p>Current rating: <span>`;
     getRatings(select_resource.id)
-    .then((currentRating) => {   
+    .then((currentRating) => {
       singleResource += currentRating;
-      singleResource += 
+      singleResource +=
                       `</span>
                   </p>
                 </div>
@@ -58,7 +56,7 @@ function getSingleResourceTemplate(category, select_resource) {
     getLikes(select_resource.id)
     .then((numLikes) => {
       singleResource += numLikes[0].count;
-      singleResource += 
+      singleResource +=
                   `</p>
                 </div>
               </div>
@@ -75,27 +73,26 @@ function getSingleResourceTemplate(category, select_resource) {
                 </div>
               </div>
             </div>
-            <div class="col-lg-2">
-              <a id="editResource" href="#">Edit</a>
-            </div>
+
             <div id="commentArea">`;
         getComments(select_resource.id)
         .then((comment) => {
           if(comment) {
-            singleResource += comment; 
+            singleResource += comment;
           }
-          singleResource += 
+          singleResource +=
             `</div>
           </div>
         </main>
       </div>`;
 
-      $('#navbar, #nick, #jotham').hide();
-      $('#singeResource').html(singleResource);
+      $('#nick, #jotham').hide();
+      $('#editResource').css("visibility", "visible");
+      $('#singleResource').html(singleResource);
       getLikesClicks();
       getRatingsClicks();
       getCommentsClicks();
-      }) 
+      })
     })
   })
 }
