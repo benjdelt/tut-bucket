@@ -189,8 +189,8 @@ module.exports = (knex) => {
     knex
     .select('*')
     .from("resources")
-    .join("likes", {"likes.resources_id": resources.id})
-    .join("users", {"likes.user_id": users.id})
+    .join("likes", {"likes.resources_id": "resources.id"})
+    .join("users", {"likes.user_id": "users.id"})
     .where({"users.id": req.params.id})
     .then((resources) => {
       if(!resources.length) {
