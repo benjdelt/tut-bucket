@@ -38,6 +38,20 @@ $(() => {
   }
 
   $("#new").on("click", () => {
+    
+    
+    
+    $("#newForm").trigger("reset");    
+    $("#modalTitle").text("New Resource");
+    $("#newFormId").attr("value", "");
+    $("#newFormTitle").attr("value", "");
+    $("#newFormImageUrl").attr("value", "");
+    $("#newFormDescription").html("");
+    $("#newFormURL").attr("value", "");
+
+
+
+    $("#deleteResource").remove();
     getCategories(null);
   })
 
@@ -149,17 +163,51 @@ $(() => {
   $("body").on("click", "#editResource", (event) => {
     event.preventDefault();
     $("#newForm").trigger("reset");
+    $("#deleteResource").remove();
+    $("#newForm > .modal-footer").prepend($(`<button type="button" id="deleteResource" class="btn btn-danger" data-toggle="confirmation"">Delete</button>`));
     $("#new-resource-form").modal("toggle");
     getCategories($("#resourceCategory").text());
     $("#modalTitle").text("Edit Resource");
     // Prepopulate form with elements from the page
-    console.log($('h2').attr('data-resourceId'));
-    $("#newFormId").attr("value", $('h2').attr('data-resourceId'));
+    const resourceId = $('h2').attr('data-resourceId');
+    $("#newFormId").attr("value", resourceId);
     $("#newFormTitle").attr("value", $("h2").text());
     $("#newFormImageUrl").attr("value", $("main img").attr("src"));
     $("#newFormDescription").html($("#resourceDescription").text());
     $("#newFormURL").attr("value", $("#resourceURL").text());
 
+    // Confirmation for delete button
+    $('[data-toggle=confirmation]').confirmation({
+      rootSelector: '[data-toggle=confirmation]'  
+    })
+    $("body").on("click", "#deleteResource", (event) => {
+        $.post(`/resources/${resourceId}`, resourceId).done((response) => {
+          $("#newForm").trigger("reset");
+          $("#new-resource-form").modal("toggle");
+
+        $('#singeResource').empty();
+        
+        $.ajax({
+          method: "GET",
+          url: "/resources"
+        }).done((resources) => {
+          $("#collections").html("");
+          for (item of resources) {
+            var result = `<div class="col-lg-3 col-md-4 col-xs-6 d-block mb-4 h-100 singleSource">
+                <img data-tag="${item.id}" class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+                <div class="carousel-caption">
+                  <h5 data-tag="${item.id}">${item.title}</h5>
+                </div>
+            </div>`;
+            $("#collections").append(result);
+          }
+          getSingleResource()
+        });
+        $('#navbar, #nick, #jotham').show();
+
+
+      })
+    })
 
   });
 

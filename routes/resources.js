@@ -145,6 +145,14 @@ module.exports = (knex) => {
 
 
   });
+  router.post("/:id", (req, res) => {
+    knex("resources")
+      .where({id: req.params.id})
+      .del()
+      .then((results) => {
+        res.json(results);
+      })
+  });
 
   router.get("/users/:id", (req, res) => {
     knex
