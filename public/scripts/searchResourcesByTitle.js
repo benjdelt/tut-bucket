@@ -1,12 +1,13 @@
 $(() => {
-  console.log("SEARCH READY");
-  $('.search').on('submit', function (e) {
+  $('#search').on('submit', function (e) {
     e.preventDefault();
+    $('#singeResource').hide();
+    $('#nick, #jotham').css("display", "inline");
     const key = $(this).serialize()
     $.post('/resources/search', key)
     .done((resources) => {
+        console.log("AJAX CALL");
         $("#collections").html("");
-        console.log(resources.length);
         if (resources.length === undefined) {
           console.log("ERRORRRR");
         } else {

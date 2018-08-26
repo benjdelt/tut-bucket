@@ -67,7 +67,6 @@ module.exports = (knex) => {
           if(!resources.length) {
             res.json({error: "Not found"});
           } else {
-            console.log(resources);
             res.json(resources);
           }
         });
@@ -116,7 +115,7 @@ module.exports = (knex) => {
           }
        });
   });
-  
+
   router.post("/", (req, res) => {
     const {id, title, imageUrl, description, category, url} = req.body;
     knex
@@ -132,7 +131,7 @@ module.exports = (knex) => {
             .returning('*')
             .then((resources) => {
               res.json(resources);
-            }) 
+            })
         } else {
           knex("resources")
           .insert({url: url, title: title, description: description, image_url: imageUrl, category_id: resources[0].id, timestamp: new Date().toISOString()})
