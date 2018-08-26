@@ -23,8 +23,6 @@ $(() => {
     displayResources();
   })
   
-  
-  
   displayResources();
 
 });
