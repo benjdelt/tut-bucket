@@ -7,7 +7,7 @@ function escape(str) {
 function postComments(resourceId, text) {
   $.post(`/resources/${resourceId}/comments`, text)
   .done((response) => {
-    updateCommentClientSide();
+    updateCommentClientSide(response[0]);
   });
 }
 
@@ -17,12 +17,22 @@ function getCommentsClicks() {
     let resourceId = $("#commentForm").attr("data-resource-id");
     // let text = escape($("#commentForm").serialize());
     let text = $("#commentForm").serialize();
-    console.log("resourceId:", resourceId);
-    console.log("text:", text);
     postComments(resourceId, text);
   })
 }
 
-function updateCommentClientSide() {
-  console.log("Comment Posted...");
+function updateCommentClientSide(comment) {
+  $.ajax({method: "GET", url: `/users/${comment.user_id}/user`})
+  .then((user) => {
+    let userInfo = user[0];
+    let newComment = 
+    `<div class="media mb-4" data-user-id="${userInfo.id}">
+      <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+      <div class="media-body" data-comment-id="${comment.id}">
+        <h5 class="mt-0">${userInfo.name}</h5>
+        ${comment.text}
+      </div>
+    </div>`;
+  $("#commentArea").prepend(newComment);
+  })
 }

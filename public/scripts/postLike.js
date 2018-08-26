@@ -1,7 +1,7 @@
 function postLike(resourceId) {
   $.post(`/resources/${resourceId}/likes`)
   .done((response) => {
-    updateLikeCountClientSide();
+    updateLikeCountClientSide(resourceId);
   });
 }
 
@@ -12,6 +12,9 @@ function getLikesClicks() {
   })
 }
 
-function updateLikeCountClientSide() {
-  console.log("Like Counter Updated...");
+function updateLikeCountClientSide(resourceId) {
+  $.ajax({method: "GET", url: `/resources/${resourceId}/likes`})
+  .then((likes) => {
+    $("#numberOfLikes > p").html(likes[0].count);
+  })
 }
