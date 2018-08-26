@@ -14,7 +14,7 @@ function displayUserResources() {
             </div>
           </a>
         </div>`;
-        $("#collections").append(result);
+        $("#userCollections").append(result);
       }
     }
   });
@@ -37,19 +37,19 @@ function displayLikedResources() {
             </div>
           </a>
         </div>`;
-        $("#collections").append(result);
+        $("#userCollections").append(result);
       }
     }
   });
 }
 
 $("#myPosts").on("click", (event) => {
-  $("#collections").html('');
+  $("#userCollections").html('');
   displayUserResources();
 });
 
 $("#myLikedPosts").on("click", (event) => {
-  $("#collections").html('');
+  $("#userCollections").html('');
   displayLikedResources();
 });
 

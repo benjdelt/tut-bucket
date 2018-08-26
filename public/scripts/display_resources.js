@@ -14,6 +14,7 @@ $(() => {
       $("#collections").append(result);
     }
     getSingleResource()
+    listenForUserPageRequest();
   });
 });
 
