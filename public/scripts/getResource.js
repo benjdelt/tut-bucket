@@ -78,7 +78,8 @@ function getSingleResource() {
                 </div>
                 <div class="col-lg-2">
                   <a href="#">Edit</a>
-                </div>`;
+                </div>
+                <div id="commentArea">`;
           getComments(select_resource.id)
           .then((comment) => {
             if(comment) {
@@ -86,6 +87,7 @@ function getSingleResource() {
             }
             singleResource += 
                 `</div>
+                </div>
               </main>
             </div>`;
             $('body').html(singleResource);
