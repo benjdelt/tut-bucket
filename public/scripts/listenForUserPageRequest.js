@@ -15,7 +15,6 @@ function listenForUserPageRequest() {
               </div>
               <div class="d-flex flex-column justify-content-between">
                 <div class="d-flex justify-content-end" style="margin:10px 10px 0 0;">
-                  <button class="btn btn-primary">+ New Post</button>
                 </div>
                 <h4>${user[0].email}</h4>
               </div>

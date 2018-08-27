@@ -1,4 +1,6 @@
 function displayUserResources() {
+  $("#userCollections").css("display", "flex");  
+  $("#nick").hide();  
   let userID = $("#user_info").attr("data-userid");
   $.ajax({
     method: "GET",
@@ -22,6 +24,8 @@ function displayUserResources() {
 }
 
 function displayLikedResources() {
+  $("#userCollections").css("display", "flex");  
+  $("#nick").hide();  
   let userID = $("#user_info").attr("data-userid");
 
   $.ajax({

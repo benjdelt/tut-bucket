@@ -20,6 +20,9 @@ $(() => {
   }
   
   $("#browseButton").on("click", () => {
+    $("#jotham, #userCollections").hide();
+    $("#nick").css("display", "block");
+
     displayResources();
   })
   
