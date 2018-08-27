@@ -1,5 +1,6 @@
 function listenForUserPageRequest() {
   $("#userPage").on("click", function(event) {
+    $("#singleUser").css("display", "block");
     event.preventDefault();
     let url = $(event.target).attr('href');
     $.ajax({method: "GET", url: `/users/${url}/user`})
