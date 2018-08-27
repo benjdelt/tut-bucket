@@ -1,5 +1,6 @@
 function getSingleResource() {
   $("#collections div.singleSource").on("click", function(event) {
+    $("#categories-buttons").css("visibility", "hidden")
     event.preventDefault();
     const urlStr = `/resources/${event.target.dataset.tag}`;
     console.log(urlStr);

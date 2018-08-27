@@ -3,6 +3,8 @@ $(() => {
     $("#singleResource").css("display", "none");
     $("#singleUser").css("display", "none");
     $("#categories-buttons").css("display", "block");
+    $("#categories-buttons").css("visibility", "visible");
+
     $.ajax({
       method: "GET",
       url: "/resources"

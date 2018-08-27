@@ -1,5 +1,7 @@
 function listenForUserPageRequest() {
   $("#userPage").on("click", function(event) {
+    $("#categories-buttons").css("visibility", "hidden");
+
     $("#singleUser").css("display", "block");
     event.preventDefault();
     let url = $(event.target).attr('href');
