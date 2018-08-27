@@ -124,7 +124,6 @@ module.exports = (knex) => {
   router.post("/", (req, res) => {
     const {id, title, imageUrl, description, category, url} = req.body;
     // Form validation Server side
-    console.log("cookie is", typeof (req.cookies["userId"]));
     if(areNotEmpty([title, description, category, url]) && req.cookies["userId"]) {
       // Update db
       knex
