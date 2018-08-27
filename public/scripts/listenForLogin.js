@@ -7,6 +7,7 @@ $(() => {
     .then(() => {
       $("#loginPage").hide();
       $("#ben").css("visibility","visible");
+      $("#userPage").attr("href",`/${userID}`);
     });
   })
 })

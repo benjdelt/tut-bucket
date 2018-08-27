@@ -10,7 +10,7 @@ function listenForUserPageRequest() {
           <div class="container">
             <div class="d-flex justify-content-between">
               <div class="d-flex p-2">
-                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/kushsolitary/128.jpg" class="mr-3 rounded" width="200px" height="200px">
+                <img src="${user[0].avatar_url}" class="mr-3 rounded" width="200px" height="200px">
                 <h2>${user[0].name}</h2>
               </div>
               <div class="d-flex flex-column justify-content-between">
