@@ -24,7 +24,7 @@ module.exports = (knex) => {
 
   router.get("/:id/comments", (req, res) => {
     knex
-      .select("comments.id", "comments.resources_id", "comments.text", "comments.timestamp", "users.name")
+      .select("comments.id", "comments.resources_id", "comments.text", "comments.timestamp", "users.name", "users.avatar_url")
       .from("comments")
       .join('users', {'users.id': 'comments.user_id'})
       .where({'comments.resources_id': req.params.id})

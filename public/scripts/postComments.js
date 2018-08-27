@@ -27,7 +27,7 @@ function updateCommentClientSide(comment) {
     let userInfo = user[0];
     let newComment = 
     `<div class="media mb-4" data-user-id="${userInfo.id}">
-      <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+      <img class="d-flex mr-3 rounded-circle" src="${userInfo.avatar_url}" width:20px; height:20px; style="border-radius:10px;" alt="">
       <div class="media-body" data-comment-id="${comment.id}">
         <h5 class="mt-0">${userInfo.name}</h5>
         ${comment.text}
