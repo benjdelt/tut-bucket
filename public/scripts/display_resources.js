@@ -3,6 +3,7 @@ $(() => {
     $("#singleResource").css("display", "none");
     $("#singleUser").css("display", "none");
     $("#categories-buttons").css("display", "block");
+
     $.ajax({
       method: "GET",
       url: "/resources"
@@ -25,7 +26,7 @@ $(() => {
   $("#browseButton").on("click", () => {
     $("#userCollections").hide();
     $("#nick").css("display", "block");
-    $("editResource").css("visibility", "hidden");
+    $("#editResource").css("visibility", "hidden");
 
     displayResources();
   })
