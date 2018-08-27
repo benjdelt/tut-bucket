@@ -100,5 +100,5 @@ $("#myLikedPosts").on("click", (event) => {
   displayLikedResources();
 });
 
-// displayLikedResources();
-// displayUserResources();
+displayLikedResources();
+displayUserResources();
