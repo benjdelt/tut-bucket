@@ -1,12 +1,12 @@
 function randomColor() {
   let colors = [
-    '#ff3232', //red
-    '#49ff53', //green
-    '#75aaff', //blue
-    '#b949ff', //purple
-    '#ff4979', //pink
-    '#fff249', //yellow
-    '#ff8e49'  //orange
+    '#17a2b8', //red
+    '#20a1b5', //green
+    '#28a6ba', //blue
+    '#30adc1', //purple
+    '#42b2c4', //pink
+    '#5fbfce', //yellow
+    '#79d6e5'  //orange
   ];
   return colors[Math.floor(Math.random() * Math.floor(colors.length))];
 }

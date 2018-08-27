@@ -1,5 +1,6 @@
 function getSingleResourceTemplate(category, select_resource) {
   $('#singleResource').css("display", "block");
+  $('#userCollections').css("display", "none");
   let userNum = $("#userPage").attr("href").replace("/", "");
   $.ajax({method: "GET", url: `/users/${userNum}/user`})
     .then((users) => {

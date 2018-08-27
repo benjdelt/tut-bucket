@@ -193,9 +193,11 @@ module.exports = (knex) => {
     .join("users", {"likes.user_id": "users.id"})
     .where({"users.id": req.params.id})
     .then((resources) => {
+      console.log("resources", resources);
       if(!resources.length) {
         res.json({error: "Not found"});
       } else {
+        console.log("resources are:",resources);
         res.json(resources);
       }
     });
