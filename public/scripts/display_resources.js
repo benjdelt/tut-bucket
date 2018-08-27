@@ -21,14 +21,15 @@ $(() => {
       listenForUserPageRequest();
     });
   }
-  
+
   $("#browseButton").on("click", () => {
     $("#userCollections").hide();
     $("#nick").css("display", "block");
+    $("editResource").css("visibility", "hidden");
 
     displayResources();
   })
-  
+
   displayResources();
 
 });
