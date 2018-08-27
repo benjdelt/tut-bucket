@@ -92,6 +92,7 @@ $(() => {
           $("#new-resource-form").modal("toggle");
 
         $('#singleResource').empty();
+        $('#editResource').css("visibility", "hidden");
 
         $.ajax({
           method: "GET",

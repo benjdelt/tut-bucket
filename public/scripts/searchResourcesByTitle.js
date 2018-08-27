@@ -1,8 +1,10 @@
 $(() => {
   $('#search').on('submit', function (e) {
     e.preventDefault();
-    $('#singleResource').hide();
     $('#editResource').css("visibility", "hidden");
+    $('#singleResource').hide();
+    $('#singleUser').hide();
+    $('#userCollections').hide();
     $('#nick, #jotham').css("display", "inline");
     const key = $(this).serialize()
     $.post('/resources/search', key)
@@ -24,7 +26,6 @@ $(() => {
         $('#singleResource').html('');
         getSingleResource();
         $('#singleResource').css("display", "inline");
-        $('#editResource').css("visibility", "visible");
       });
   });
 });
