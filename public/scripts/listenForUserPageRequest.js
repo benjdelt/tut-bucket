@@ -4,7 +4,7 @@ function listenForUserPageRequest() {
     let url = $(event.target).attr('href');
     $.ajax({method: "GET", url: `/users/${url}/user`})
     .done((user) => {
-      var singleUser = 
+      var singleUser =
       `<div id="jotham">
         <div id="user_info" data-userID="${user[0].id}" class="container" style="margin-top:100px;max-width:70%;">
           <div class="container">
@@ -36,12 +36,13 @@ function listenForUserPageRequest() {
           </div>
         </div>
       </div>
-      <script type="text/javascript" src="/scripts/displayUserCollections.js"></script>`;        
+      <script type="text/javascript" src="/scripts/displayUserCollections.js"></script>`;
       $('#nick, #singleResource').hide();
       $('#singleUser').html(singleUser);
+      $('#editResource').css("visibility", "hidden");
       getLikesClicks();
       getRatingsClicks();
       getCommentsClicks();
-    }) 
+    })
   })
 }

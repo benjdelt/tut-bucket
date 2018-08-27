@@ -1,4 +1,5 @@
 function displayUserResources() {
+
   let userID = $("#user_info").attr("data-userid");
   $.ajax({
     method: "GET",
